@@ -1,7 +1,7 @@
 apiVersion: cluster.appdynamics.com/v1alpha1
 kind: Clusteragent
 metadata:
-  name: gary-k8s-cluster-agent-for-dev
+  name: k8s-cluster-agent-for-dev
   namespace: appdynamics
 spec:
   appName: "dev-cluster"
@@ -13,7 +13,7 @@ spec:
   # auto-instrumentation config	
   instrumentationMethod: Env
   nsToInstrumentRegex: dev
-  defaultAppName: gary-k8s-demoapp
+  defaultAppName: k8s-demoapp
   instrumentationRules:
   - language: java
     imageInfo:

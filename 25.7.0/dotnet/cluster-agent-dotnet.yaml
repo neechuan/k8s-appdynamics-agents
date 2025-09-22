@@ -1,0 +1,28 @@
+apiVersion: cluster.appdynamics.com/v1alpha1
+kind: Clusteragent
+metadata:
+  name: k8s-cluster-agent-dev-cluster
+  namespace: appdynamics
+spec:
+  appName: "dev-cluster"
+  controllerUrl: ""
+  account: ""
+  image: "docker.io/appdynamics/cluster-agent:latest"
+  serviceAccountName: appdynamics-cluster-agent
+  nsToMonitorRegex: dev
+  resources:
+    limits:
+      cpu: "1250m"
+      memory: "300Mi"
+    requests:
+      cpu: "200m"
+      memory: "100Mi"
+  stdoutLogging: "true"
+  instrumentationRules:
+    - namespaceRegex: dev
+      language: dotnetcore
+      appName: k8s-dotnetapp
+      imageInfo:
+        image: "docker.io/appdynamics/dotnet-core-agent:latest"
+        agentMountPath: /opt/appdynamics
+        imagePullPolicy: Always
