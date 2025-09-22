@@ -1,0 +1,46 @@
+installClusterAgent: true
+installInfraViz: true
+
+# AppDynamics controller info (VALUES TO BE PROVIDED BY THE USER)
+controllerInfo:
+  url: 
+  account: 
+  username: 
+  password: 
+  accessKey: 
+
+# Cluster agent config
+clusterAgent:
+  nsToMonitorRegex: .*
+
+infraViz:
+  enableMasters: true
+  stdoutLogging: true
+  enableServerViz: true
+
+netViz:
+  enabled: true
+
+#=====
+instrumentationConfig:
+  enabled: true
+  instrumentationMethod: Env
+  nsToInstrumentRegex: dev
+  defaultAppName: demoapp-dev
+  defaultInstrumentMatchString: .*
+
+  imageInfo:
+    java:
+      image: "docker.io/appdynamics/java-agent:latest"
+      agentMountPath: /opt/appdynamics
+      imagePullPolicy: Always
+  instrumentationRules:
+    - namespaceRegex: dev
+      appName: demoapp-dev
+      language: java
+      imageInfo:
+        image: "docker.io/appdynamics/java-agent:23.5.0"
+        agentMountPath: /opt/appdynamics
+        imagePullPolicy: Always
+      matchString: "^world"
+#=====
