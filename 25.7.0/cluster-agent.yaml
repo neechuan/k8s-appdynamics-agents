@@ -1,0 +1,13 @@
+apiVersion: cluster.appdynamics.com/v1alpha1
+kind: Clusteragent
+metadata:
+  name: k8s-cluster-agent-dev-cluster
+  namespace: appdynamics
+spec:
+  appName: "dev-cluster"
+  controllerUrl: ""
+  account: ""
+  image: "docker.io/appdynamics/cluster-agent:latest"
+  serviceAccountName: appdynamics-cluster-agent
+  nsToMonitorRegex: default|dev|appdynamics
+  stdoutLogging: "true"
