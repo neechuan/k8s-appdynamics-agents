@@ -1,0 +1,40 @@
+apiVersion: cluster.appdynamics.com/v1alpha1
+kind: Clusteragent
+metadata:
+  name: gary-k8s-cluster-agent-for-dev
+  namespace: appdynamics
+spec:
+  appName: "dev-cluster"
+  controllerUrl: ""
+  account: ""
+  image: "docker.io/appdynamics/cluster-agent:latest"
+  serviceAccountName: appdynamics-cluster-agent
+  nsToMonitorRegex: dev
+  # auto-instrumentation config	
+  instrumentationMethod: Env
+  nsToInstrumentRegex: dev
+  defaultAppName: gary-k8s-demoapp
+  instrumentationRules:
+  - language: java
+    imageInfo:
+        image: docker.io/appdynamics/java-agent:latest
+        agentMountPath: /opt/appdynamics
+        imagePullPolicy: Always
+  targetAllocator:
+    enabled: true
+    clusterAgentReplicas: 2
+    autoScaling:
+      enabled: true
+      replicaProfile: Default
+      maxClusterAgentReplicas: 2
+      scaleDown:
+        stabilizationWindowSeconds: 86400 #In Seconds
+    podConfig:
+      resources:
+        limits:
+          cpu: 500m
+          memory: 500Mi
+        requests:
+          cpu: 200m
+          memory: 200Mi
+
