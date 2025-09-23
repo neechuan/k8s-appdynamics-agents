@@ -1,0 +1,24 @@
+apiVersion: cluster.appdynamics.com/v1alpha1
+kind: Clusteragent
+metadata:
+  name: k8s-cluster-agent-for-dev
+  namespace: appdynamics
+spec:
+  containerAppCorrelationMethod: proxy
+  appName: "dev-cluster"
+  controllerUrl: ""
+  account: ""
+  image: "docker.io/appdynamics/cluster-agent:latest"
+  serviceAccountName: appdynamics-cluster-agent
+  nsToMonitorRegex: default|dev|stage|prod|demo|appdynamics
+  stdoutLogging: "true"
+  # auto-instrumentation config
+  instrumentationMethod: Env
+  nsToInstrumentRegex: dev
+  defaultAppName: k8s-demoapp
+  instrumentationRules:
+  - language: java
+    imageInfo:
+        image: docker.io/appdynamics/java-agent:latest
+        agentMountPath: /opt/appdynamics
+        imagePullPolicy: Always
