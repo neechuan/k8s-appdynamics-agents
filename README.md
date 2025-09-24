@@ -1,8 +1,8 @@
-Author: Gary Chew
+Author: <b>Gary Chew</b>
 
 These repos show examples using AppDynamics agents to monitor Kubernetes node, cluster resources and its workloads.
 
-<b>AppDynamics Cluster Agent</b>
+<h2>AppDynamics Cluster Agent</h2>
 The AppDynamics Cluster Agent is a lightweight monitoring agent designed specifically for Kubernetes and OpenShift clusters. It functions by collecting metrics, metadata, and events for the entire Kubernetes cluster, including all nodes, namespaces, and down to the container level. This enables organizations to monitor the health and performance of their Kubernetes infrastructure and understand how it impacts application and business performance.
 
 Key functions of the AppDynamics Cluster Agent include:
@@ -14,7 +14,7 @@ Pod and Container Monitoring: The agent tracks pods in various states, container
 
 Overall, the Cluster Agent provides comprehensive visibility into Kubernetes clusters, enabling proactive monitoring and troubleshooting of cloud-native applications deployed in containerized environments.
 
-<b>AppDynamics InfraViz Agent</b>
+<h2>AppDynamics InfraViz Agent</h2>
 1. The InfraViz Agent is part of the AppDynamics Infrastructure Visibility solution designed to monitor Kubernetes clusters.
 2. It is deployed as a Kubernetes DaemonSet and works alongside the Cluster Agent to provide detailed visibility into the Kubernetes infrastructure.
 3. The InfraViz Agent collects metrics and metadata from Kubernetes nodes, grouping them by roles such as master, worker, infra, and worker-infra.
