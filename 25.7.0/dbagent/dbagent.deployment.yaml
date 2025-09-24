@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-agent
+  namespace: appdynamics
+  labels:
+    app: db-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-agent
+  template:
+    metadata:
+      labels:
+        app: db-agent
+    spec:
+      containers:
+        - name: db-agent
+# ------- customer can use any agent version but latest version is recommended. Also, AppDynamics only supports images published at https://hub.docker.com/r/appdynamics/db-agent/tags
+          image: appdynamics/db-agent:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: appd-db-agent-properties
+            - secretRef:
+                name: appd-agent-secret
+          volumeMounts:
+            - name: logs
+              mountPath: /opt/appdynamics/db-agent/logs
+            - name: appd-db-agent-log-config
+              mountPath: /opt/appdynamics/db-agent/conf/logging
+      volumes:
+        - name: logs
+          emptyDir: {}
+        - name: appd-db-agent-log-config
+          configMap:
+            name: appd-db-agent-log-config

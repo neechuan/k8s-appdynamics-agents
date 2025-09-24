@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: appd-db-agent-properties
+  namespace: appdynamics
+data:
+#  ----- comment out properties whichever required -----
+  APPDYNAMICS_CONTROLLER_HOST_NAME: ""
+  APPDYNAMICS_CONTROLLER_PORT: "443"
+  APPDYNAMICS_CONTROLLER_SSL_ENABLED: "true"
+  APPDYNAMICS_DB_AGENT_NAME: "db-agent"
+  APPDYNAMICS_AGENT_ACCOUNT_NAME: ""
+#  ----- To set unique host id on k8s, pass db property -Ddisable.kubernetes.host.resolver=true as well in APPDYNAMICS_DB_PROPERTIES -----
+#  APPDYNAMICS_AGENT_UNIQUE_HOST_ID: ""
+#  APPDYNAMICS_AGENT_PROXY_HOST: ""
+#  APPDYNAMICS_AGENT_PROXY_PORT: ""
+#  APPDYNAMICS_AGENT_PROXY_USER: ""
+#  APPDYNAMICS_AGENT_PROXY_PASS: ""
+#  ----- Pass more system properties in below parameter separated by space. -----
+#  ----- For eg - APPDYNAMICS_DB_PROPERTIES: "-Ddbagent.telemetry.enabled=true -Dretry.on.auth.failure=false" -----
+  APPDYNAMICS_DB_PROPERTIES: "-Ddisable.kubernetes.host.resolver=true -Ddbagent.telemetry.enabled=true"
+#
+#  please refer to $(Agent-Base-Install-Dir)/conf/controller-info.xml for more info about db agent properties
+

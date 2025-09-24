@@ -1,0 +1,43 @@
+# appd-db-agent.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-agent
+  namespace: appdynamics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-agent
+  template:
+    metadata:
+      labels:
+        app: db-agent
+    spec:
+      serviceAccountName: appdynamics-db-agent  # <-- Important!
+
+      containers:
+      - name: db-agent
+        image: docker.io/appdynamics/db-agent:latest
+        env:
+          - name: APPDYNAMICS_CONTROLLER_HOST_NAME
+            value: "apac-ps-sandbox.saas.appdynamics.com"
+          - name: APPDYNAMICS_CONTROLLER_PORT
+            value: "443"
+          - name: APPDYNAMICS_CONTROLLER_SSL_ENABLED
+            value: "true"
+          - name: APPDYNAMICS_AGENT_ACCOUNT_NAME
+            value: "apac-ps-sandbox"
+          - name: APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: appd-secret
+                key: APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY
+
+          # Name this agent as it appears in the Controller
+          - name: APPDYNAMICS_DB_AGENT_NAME
+            value: "K8DBAgent"
+
+          # For memory management or other Java opts
+          - name: JAVA_OPTS
+            value: "-Xms128m -Xmx512m"
