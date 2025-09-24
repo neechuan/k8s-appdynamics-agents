@@ -34,3 +34,9 @@ Example to install a Single Cluster Agent with Java auto-instrumentation on dev 
 
 
 Example to install a Single Cluster Agent with Java auto-instrumentation on dev & stage namespace, enable Infraviz and NetViz: values-ca-dev-infraviz-autoinstrument-upgrade-saas-simple.yaml
+
+Replicas example: values-ca-dev-saas-simple-replicas.yaml
+
+Autoscale example: values-ca-dev-saas-simple-autoscale.yaml
+
+
