@@ -1,0 +1,22 @@
+installClusterAgent: true
+installInfraViz: true
+
+# AppDynamics controller info (VALUES TO BE PROVIDED BY THE USER)
+controllerInfo:
+  url: 
+  account: 
+  username: 
+  password: 
+  accessKey: 
+
+# Cluster agent config
+clusterAgent:
+  nsToMonitorRegex: .*
+
+targetAllocator:
+  enabled: true
+  clusterAgentReplicas: 2
+  autoScaling:
+    enabled: true
+    replicaProfile: Default
+    podsPercentagePerReplica: 90
